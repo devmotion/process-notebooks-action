@@ -68,6 +68,7 @@ def export_html(file, path):
         
         writer = FilesWriter(config=c)
         writer.write(str(soup), *html[1:], path.stem)
+        print(f"Writing file { path }")
 
 def parse_cell(string):
     s = re.finditer('#<keep>\n', string)
@@ -112,6 +113,7 @@ def export_without_code(file, path):
         notebook.cells = new_cells        
         with path.open('w') as file:
             json.dump(notebook, file)
+            print(f"Writing file {path}")
         
         
 def get_parser():
