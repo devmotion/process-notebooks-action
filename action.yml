@@ -7,7 +7,7 @@ inputs:
 runs:
   using: docker
   image: Dockerfile
-  args: ['-o ${{ inputs.working_directory }}','${{ inputs.working_directory }}']
+  args: ['-o${{ inputs.working_directory }}','${{ inputs.working_directory }}']
 branding:
   icon: book
   color: blue
