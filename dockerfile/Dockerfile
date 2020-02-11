@@ -1,7 +1,6 @@
 FROM python:alpine3.7
-COPY . /app
-WORKDIR /app
+COPY . /root/
 RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
-ENTRYPOINT ["python", "./generate_public.py"]
+    && pip install -r /root/requirements.txt
+ENTRYPOINT ["python", "/root/generate_public.py"]
 CMD ["--help"]
