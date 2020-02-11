@@ -6,7 +6,7 @@ inputs:
     required: true
 runs:
   using: docker
-  image: dockerfile/Dockerfile
+  image: Dockerfile
   args: ['-o ${{ inputs.working_directory }}','${{ inputs.working_directory }}']
 branding:
   icon: book
