@@ -1,0 +1,13 @@
+name: 'Process Jupyter Notebooks'
+description: 'Compile a website of the notebook and export a new notebook with empty code cells.'
+inputs:
+    working_directory:
+        description: 'Working directory'
+        required: true
+runs:
+    using: docker
+    image: dockerfile/Dockerfile
+    args: '-o ${{ inputs.working_directory }} ${{ inputs.working_directory }}'
+branding:
+    icon: book
+    color: blue
