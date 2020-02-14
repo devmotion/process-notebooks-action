@@ -86,7 +86,8 @@ def parse_code_cell(cell):
         cell.execution_count = None
     if cell.outputs:
         cell.outputs = []
-    if not ('keep' in cell.get('metadata', {}).get('tags', [])):
+    tags = cell.get('metadata', {}).get('tags', [])
+    if not ('keep' in tags):
         cell.source = parse_cell(cell.source)
 
 
@@ -95,7 +96,11 @@ def export_without_code(file, path):
         notebook = nbformat.read(f, as_version=4)
         new_cells = []
         last_was_empty_code_cell = False
-        for cell in notebook.cells:    
+        for cell in notebook.cells:
+            tags = cell.get('metadata', {}).get('tags', [])
+            if 'remove' in tags:
+                continue
+            
             if cell.cell_type == 'code':
                 parse_code_cell(cell)
                 if not cell.source: # is empty
