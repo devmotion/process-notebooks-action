@@ -71,15 +71,9 @@ def export_html(file, path):
         print(f"Writing file { path }")
 
 def parse_cell(string):
-    s = re.finditer('#<keep>\n', string)
-    e = re.finditer('#</keep>\n', string)
-    new = []
-    while True:
-        try:
-            new.append(string[next(s).end():next(e).start()])
-        except StopIteration:
-            break
-    return "".join(new)
+    # only keep content between '#<keep>\n' and '#</keep>\n' or '#</keep>$' (end of string)
+    regex = r'#<keep>\n(.*?)#</keep>(?:\n|$)'
+    return "".join(re.findall(regex, string, re.DOTALL))
 
 def parse_code_cell(cell):
     if cell.execution_count:
