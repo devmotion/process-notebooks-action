@@ -8,7 +8,7 @@ More concretely, the action
 - keeps the content of code cells with the tag `keep`,
 - keeps the content of code cells without the tag 'keep' that is enclosed by `#<keep>\n` and `#</keep>\n`.
 
-A code cell may contain multiple `#<keep>/n`-`#</keep>/n` blocks. At the end of a cell thw newline character may be omitted, i.e. a cell may end with `#</keep>`.
+A code cell may contain multiple `#<keep>/n`-`#</keep>/n` blocks. At the end of a cell the newline character may be omitted, i.e. a cell may end with `#</keep>`.
 
 ## Inputs
 
