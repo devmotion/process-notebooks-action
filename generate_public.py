@@ -19,7 +19,10 @@ Modified by: David Widmann 2021
 import json
 import argparse
 import nbformat
+
+import copy
 import re
+
 from traitlets.config import Config
 from nbconvert import HTMLExporter, PDFExporter, LatexExporter
 from nbconvert.writers import FilesWriter
@@ -33,6 +36,7 @@ def export_html(notebook, path):
     c.FilesWriter.build_directory = path.parent.as_posix()
 
     # remove '#<keep>' and '#</keep>'
+    notebook = copy.deepcopy(notebook)
     for cell in notebook.cells:
         if cell.get('cell_type') == 'code':
             cell.source = re.sub('#<\/?keep>(?:\n|$)', '', cell.source)
@@ -65,6 +69,7 @@ def export_clean(notebook, path):
     new_cells = []
     last_was_empty_code_cell = False
     keep_regex = r'#<keep>\n(.*?)#</keep>(?:\n|$)'
+    notebook = copy.deepcopy(notebook)
     for cell in notebook.cells:
         # obtain and remove tags
         tags = cell.get('metadata', {}).get('tags', [])
